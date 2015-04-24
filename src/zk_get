@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+import zktools
+
+if __name__ == "__main__":
+    args = zktools.args('Gets data from ZK node by its path')
+    try:
+        with zktools.kazoo(args.host) as zk:
+            print zktools.get(zk, args.path)[0]
+            zktools.ok()
+    except Exception as e:
+        print e
+        zktools.fail()

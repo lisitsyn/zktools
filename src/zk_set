@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+
+import zktools
+
+if __name__ == "__main__":
+    args = zktools.args('Sets value for ZK node by path (reads data from stdin)')
+    try:
+        with zktools.kazoo(args.host) as zk:
+            data = zktools.stdin()
+            zktools.set(zk, args.path, data)
+            zktools.ok()
+    except Exception as e:
+        print e
+        zktools.fail()
